@@ -1,4 +1,4 @@
-import {GET_POSTS, GET_POST, GET_POSTS_CANCELED} from "./postActions";
+import {GET_POSTS, GET_POST, GET_POSTS_SUCCESS, ADD_POST_SUCCESS} from "./postActions";
 const initialState = {
     data: []
 }
@@ -6,6 +6,11 @@ export function postReducer(state = initialState, action){
     switch (action.type){
         case GET_POSTS: {
             console.log(action.payload)
+            return {
+                ...state
+            }
+        }
+        case GET_POSTS_SUCCESS: {
             return {
                 ...state,
                 data: action.payload
@@ -16,9 +21,10 @@ export function postReducer(state = initialState, action){
                 ...state
             }
         }
-        case GET_POSTS_CANCELED: {
+        case ADD_POST_SUCCESS: {
             return {
-                ...state
+                ...state,
+                data: action.payload
             }
         }
         default: return state;
