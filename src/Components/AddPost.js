@@ -30,7 +30,6 @@ export function AddPost(){
                     <button type="submit" className="btn btn-submit">Add Post</button>
                 </Form>
             </Formik>
-            <button onClick={() => dispatch(updatePost(id))}>Update</button>
         </div>
     )
 }
