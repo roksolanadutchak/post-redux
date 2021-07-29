@@ -1,9 +1,9 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import {combineEpics, createEpicMiddleware} from "redux-observable";
-import {getPostsEpic} from "./epics/getPostsEpic";
+import {addPostEpic, deletePostEpic, postEpic, postsEpic, updatePostEpic} from "./epics/postsEpic";
 import {postReducer} from "./reducers/postReducer";
 export function configureStore(){
-    const rootEpic = combineEpics(getPostsEpic);
+    const rootEpic = combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic);
     const epicMiddleware = createEpicMiddleware();
     const rootReducer = combineReducers({
         app: postReducer
