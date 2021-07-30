@@ -1,13 +1,15 @@
 import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch} from "react-redux";
 import {Link } from 'react-router-dom';
-import { getPosts, deletePost, updatePost } from "../reducers/postActions";
+import { deletePost } from "../actions/postActions";
+import { getPosts } from "../actions/postListActions"
 import { default as dismiss } from '../assets/delete.svg';
 import { default as pencil} from '../assets/pencil.svg'
 
 export function PostList(){
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.app.data)
+    console.log(posts)
     const [deleteId, setDeleteId] = useState(0)
 
     useEffect(()=>{
@@ -41,8 +43,6 @@ export function PostList(){
                 </div>
             ))}
         </div>
-        <button onClick={()=>dispatch(deletePost(1))}>delete post</button>
     </div>
 )
-
 }

@@ -5,9 +5,9 @@ import { ofType } from "redux-observable";
 import {
     ADD_POST,
     addPostSuccess, DELETE_POST, deletePostSuccess, GET_POST,
-    GET_POSTS,
-    getPostsSuccess, getPostSuccess, UPDATE_POST, updatePostSuccess
-} from "../reducers/postActions";
+    getPostSuccess, UPDATE_POST, updatePostSuccess
+} from "../actions/postActions";
+import { GET_POSTS, getPostsSuccess} from "../actions/postListActions";
 
 export const postsEpic = action$ => action$.pipe(
     ofType(GET_POSTS),
@@ -28,7 +28,7 @@ export const addPostEpic = action$ => action$.pipe(
         method: "POST",
         body: action.payload
     }).pipe(
-        map(post => addPostSuccess(post))
+        map(post => addPostSuccess(post.response))
     ))
 )
 export const deletePostEpic = action$ => action$.pipe(

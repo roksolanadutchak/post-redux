@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import {useParams} from "react-router";
 import { Form, Formik, Field } from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {addPost, getPost, updatePost} from "../reducers/postActions";
+import {addPost, getPost, updatePost} from "../actions/postActions";
 
 export function AddPost(){
     const dispatch = useDispatch()
-    const post = useSelector((state) => state.app.data)
+    const posts = useSelector((state) => state.post.data)
     const { id }= useParams();
     useEffect(()=>{
         if(id){
@@ -22,13 +22,12 @@ export function AddPost(){
     }
     return(
         <div>
-            <h1>Add Post</h1>
+            { id ? <h1>Update Post</h1> : <h1>Add Post</h1> }
             <Formik enableReinitialize
-                initialValues={{id : id, title: id ? post.title : '', body: id ? post.body : '', userId: id ? post.userId : 0}}
+                initialValues={{id : id, title: id ? posts.title : '', body: id ? posts.body : '', userId: id ? posts.userId : 0}}
                 onSubmit={(values, actions) => {
                    //dispatch(addPost(values))
                     submitForm(values)
-                    console.log('work')
                 }}
             >
                 <Form>

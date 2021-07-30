@@ -6,6 +6,9 @@ import {
 import {PostList} from "./Components/PostList";
 import {AddPost} from "./Components/AddPost";
 import Header from "./Components/Header";
+import {UsersList} from "./Components/UsersList";
+import {Post} from "./Components/Post";
+
 function App() {
   return (
     <div className="App">
@@ -14,13 +17,13 @@ function App() {
         </div>
         <Switch>
             <Route exact path="/">
-                <PostList />
+                <UsersList />
             </Route>
             <Route path="/add">
                 <AddPost />
             </Route>
-            <Route path="/edit/:id">
-                <AddPost />
+            <Route path="/post/:id">
+                <Post />
             </Route>
         </Switch>
     </div>
