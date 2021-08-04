@@ -107,8 +107,7 @@ export function UsersList(){
                             {
                                 user.id === selectedUserId && <tr >
                                     <td colSpan={8}>
-                                        {!userPosts ? (<div className="loader">Loading...</div>) :
-                                            (<table className="table-fixed w-full">
+                                        { userPosts && <table className="table-fixed w-full">
                                                 <tbody>
                                                 {userPosts && userPosts.map((post) => (
                                                     <tr key={post.id} className="border">
@@ -120,7 +119,7 @@ export function UsersList(){
                                                     </tr>
                                                 ))}
                                                 </tbody>
-                                            </table>)
+                                            </table>
                                         }
                                     </td>
                                 </tr>
