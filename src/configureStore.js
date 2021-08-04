@@ -7,15 +7,28 @@ import {UsersListReducer} from "./reducers/UsersListReducer";
 import {getUsersEpic} from "./epics/usersEpic";
 import {userPostsEpic} from "./epics/userPostsEpic";
 import {UserPostsReducer} from "./reducers/UserPostsReducer";
+import {CommentsReducer} from "./reducers/CommentsReducer";
+import {commentsEpic} from "./epics/commentsEpic";
+import {CLEAR_USER_POST} from "./actions/userPostsAction";
+import {CLEAR_COMMENTS} from "./actions/commentsAction";
 export function configureStore(){
-    const rootEpic = combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic,getUsersEpic, userPostsEpic);
+    const rootEpic = combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic,getUsersEpic, userPostsEpic, commentsEpic);
     const epicMiddleware = createEpicMiddleware();
-    const rootReducer = combineReducers({
+    const appReducer = combineReducers({
         app: postsListReducer,
         post: postReducer,
         users: UsersListReducer,
-        userPosts: UserPostsReducer
+        userPosts: UserPostsReducer,
+        comments: CommentsReducer
     });
+    const rootReducer = (state, action) => {
+      if (action.type === CLEAR_USER_POST){
+          state.userPosts.userPosts = undefined;
+      } else if(action.type === CLEAR_COMMENTS){
+          state = undefined;
+      }
+      return appReducer(state, action);
+    }
     const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
     epicMiddleware.run(rootEpic);
     console.log(store.getState())

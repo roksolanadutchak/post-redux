@@ -7,7 +7,6 @@ export function getUsers(){
     }
 }
 export function getUsersSuccess(data){
-    console.log(data)
     return {
         type: GET_USERS_SUCCESS,
         payload: data

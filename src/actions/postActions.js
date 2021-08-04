@@ -8,14 +8,12 @@ export const UPDATE_POST = "UPDATE_POST";
 export const UPDATE_POST_SUCCESS = "UPDATE_POST_SUCCESS";
 
 export function getPost(postId){
-    console.log(postId)
     return {
         type: GET_POST,
         payload: postId
     }
 }
 export function getPostSuccess(data){
-    console.log(data)
     return {
         type: GET_POST_SUCCESS,
         payload: data
@@ -45,6 +43,7 @@ export function deletePostSuccess(post){
     }
 }
 export const updatePost = values =>{
+    console.log(values)
     return {
         type: UPDATE_POST,
         payload: values

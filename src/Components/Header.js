@@ -10,6 +10,9 @@ function Header(){
                         <Link to="/" className="nav-link">List of users</Link>
                     </li>
                     <li className="nav-li">
+                        <Link to="/posts"className="nav-link" >List of posts</Link>
+                    </li>
+                    <li className="nav-li">
                         <Link to="/add" className="nav-link">Add new post</Link>
                     </li>
                 </ul>

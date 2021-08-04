@@ -9,7 +9,6 @@ import { default as pencil} from '../assets/pencil.svg'
 export function PostList(){
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.app.data)
-    console.log(posts)
     const [deleteId, setDeleteId] = useState(0)
 
     useEffect(()=>{

@@ -7,7 +7,6 @@ export function getPosts(){
     }
 }
 export function getPostsSuccess(data){
-    console.log(data)
     return {
         type: GET_POSTS_SUCCESS,
         payload: data

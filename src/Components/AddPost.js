@@ -6,7 +6,7 @@ import {addPost, getPost, updatePost} from "../actions/postActions";
 
 export function AddPost(){
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.post.data)
+    const posts = useSelector((state) => state.post.post)
     const { id }= useParams();
     useEffect(()=>{
         if(id){

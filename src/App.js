@@ -19,11 +19,17 @@ function App() {
             <Route exact path="/">
                 <UsersList />
             </Route>
+            <Route path="/posts">
+                <PostList />
+            </Route>
             <Route path="/add">
                 <AddPost />
             </Route>
             <Route path="/post/:id">
                 <Post />
+            </Route>
+            <Route path="/edit/:id">
+                <AddPost />
             </Route>
         </Switch>
     </div>
