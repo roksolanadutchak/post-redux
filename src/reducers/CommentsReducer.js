@@ -1,5 +1,5 @@
 import {
-    GET_COMMENTS_SUCCESS,
+    GET_COMMENTS_SUCCESS
 } from "../actions/commentsAction";
 const initialState = {
     comments: []
@@ -10,8 +10,7 @@ export function CommentsReducer(state = initialState, action){
             console.log(action.payload)
             return {
                 ...state,
-                comments: action.payload,
-                error: null
+                comments: action.payload
             }
         }
         default: return state;
