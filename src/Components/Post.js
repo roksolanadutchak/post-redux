@@ -29,21 +29,23 @@ export function Post(){
     return (
         <div className="container mx-auto">
             <div className="grid grid-cols-3 gap-4">
-                {post && <div className="col-start-2 col-end-3 row-start-2 bg-blue-100">
-                    <h1 className="font-bold">{post.title}</h1>
-                    <p>{post.body}</p>
-                    <div className="flex flex-row justify-around">
-                        <button onClick={showComments} className=" btn btn-submit">Show comments</button>
-                        <button className="btn btn-update"><Link to={`${url}/edit`}>Update</Link></button>
-                        <button onClick={removePost} className="btn btn-cancel">Delete</button>
+                {post && <div className="post-container">
+                    <div className="grid">
+                        <h1 className="font-bold uppercase">{post.title}</h1>
+                        <p className="text-justify m-1.5">{post.body}</p>
+                        <div className="btn-group">
+                            <button onClick={showComments} className=" btn btn-submit">Show comments</button>
+                            <button className="btn btn-update"><Link to={`${url}/edit`}>Update</Link></button>
+                            <button onClick={removePost} className="btn btn-cancel">Delete</button>
+                        </div>
                     </div>
                 </div>}
                 {
                     comments && comments.map((comment) => (
-                        <div key={comment.id} className="grid grid-cols-3 border bg-gray-50">
+                        <div key={comment.id} className="comment-container">
                             <h1 className="font-bold ">{comment.name}</h1>
-                            <p className="italic row-span-2">{comment.email}</p>
-                            <p className="col-span-3 row-span-2">{comment.body}</p>
+                            <p className="italic">{comment.email}</p>
+                            <p className="comment-body">{comment.body}</p>
                         </div>
                     ))
                 }

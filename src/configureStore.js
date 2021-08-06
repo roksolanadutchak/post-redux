@@ -11,8 +11,15 @@ import {CommentsReducer} from "./reducers/CommentsReducer";
 import {commentsEpic} from "./epics/commentsEpic";
 import {CLEAR_USER_POST} from "./actions/userPostsAction";
 import {CLEAR_COMMENTS} from "./actions/commentsAction";
+import { tap } from 'rxjs';
+
 export function configureStore(){
-    const rootEpic = combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic,getUsersEpic, userPostsEpic, commentsEpic);
+    const rootEpic = (action$, store) =>
+        combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic,getUsersEpic, userPostsEpic, commentsEpic)(action$, store).pipe(
+            tap({
+                error: error => console.error('ERROR: ', error)
+            })
+        )
     const epicMiddleware = createEpicMiddleware();
     const appReducer = combineReducers({
         app: postsListReducer,

@@ -21,7 +21,7 @@ export function AddPost(){
         }
     }
     return(
-        <div>
+        <div className="container mx-auto">
             { id ? <h1>Update Post</h1> : <h1>Add Post</h1> }
             <Formik enableReinitialize
                 initialValues={{id : id, title: id ? posts.title : '', body: id ? posts.body : '', userId: id ? posts.userId : 0}}

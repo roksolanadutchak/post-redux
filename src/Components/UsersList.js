@@ -37,7 +37,7 @@ export function UsersList(){
                     <tbody>
                     {users && users.map((user) =>(
                         <React.Fragment key={user.id}>
-                            <tr className="border">
+                            <tr className="border hover:bg-gray-50">
                                 <td className="table-cell" >{user.name}</td>
                                 <td className="table-cell" >{user.username}</td>
                                 <td className="table-cell" >{user.email}</td>
@@ -111,7 +111,7 @@ export function UsersList(){
                                                 <tbody>
                                                 {userPosts && userPosts.map((post) => (
                                                     <tr key={post.id} className="border">
-                                                        <td colSpan={3}>
+                                                        <td colSpan={3} className="hover:text-gray-500">
                                                             <Link to={`/post/${post.id}`}>
                                                                 {post.title}
                                                             </Link>
