@@ -1,24 +1,32 @@
 import { ajax } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
-import { mergeMap } from "rxjs";
+import {catchError, map} from 'rxjs/operators';
+import { mergeMap, of } from "rxjs";
 import { ofType } from "redux-observable";
 import {
     ADD_POST,
-    addPostSuccess, DELETE_POST, deletePostSuccess, GET_POST,
+    addPostSuccess, DELETE_POST, deletePostSuccess, GET_POST, GET_POST_ERROR,
     getPostSuccess, UPDATE_POST, updatePostSuccess
 } from "../actions/postActions";
-import { GET_POSTS, getPostsSuccess} from "../actions/postListActions";
+import {GET_POSTS, GET_POSTS_ERROR, getPostsSuccess} from "../actions/postListActions";
 
 export const postsEpic = action$ => action$.pipe(
     ofType(GET_POSTS),
     mergeMap((action) => ajax.getJSON('https://jsonplaceholder.typicode.com/posts').pipe(
-        map(response => getPostsSuccess(response))
+        map(response => getPostsSuccess(response)),
+        catchError(error => of({
+            type: GET_POSTS_ERROR,
+            payload:  error
+        }))
     ))
 )
 export const postEpic = action$ => action$.pipe(
     ofType(GET_POST),
     mergeMap((action) => ajax.getJSON(`https://jsonplaceholder.typicode.com/posts/${action.payload}`).pipe(
-        map(response => getPostSuccess(response))
+        map(response => getPostSuccess(response)),
+        catchError(error => of({
+            type: GET_POST_ERROR,
+            payload: error
+        }))
     ))
 )
 export const addPostEpic = action$ => action$.pipe(

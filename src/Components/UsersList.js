@@ -9,7 +9,10 @@ import {Link} from "react-router-dom";
 export function UsersList(){
     const dispatch = useDispatch()
     const users = useSelector((state) => state.users.users)
+    const usersError = useSelector((state) => state.users.error)
+    const usersLoading = useSelector((state) => state.users.loading)
     let userPosts = useSelector((state) => state.userPosts.userPosts)
+    const postLoading = useSelector((state) => state.userPosts.loading)
     const [selectedUserId, setSelectedUserId] = useState(0)
     useEffect(() => {
         dispatch(getUsers())
@@ -18,6 +21,8 @@ export function UsersList(){
         setSelectedUserId(userId);
         dispatch(getUserPosts(userId))
     }
+    if(usersLoading) return <div className="loader">Loading...</div>;
+    if(usersError) return <h1 className="text-red-900 uppercase">{usersError.message}</h1>
     return (
         <div className="container mx-auto">
                 <table className="table-auto w-full border">
@@ -109,7 +114,7 @@ export function UsersList(){
                                     <td colSpan={8}>
                                         { userPosts && <table className="table-fixed w-full">
                                                 <tbody>
-                                                {userPosts && userPosts.map((post) => (
+                                                {postLoading ? <div className="loader">Loading...</div> : userPosts && userPosts.map((post) => (
                                                     <tr key={post.id} className="border">
                                                         <td colSpan={3} className="hover:text-gray-500">
                                                             <Link to={`/post/${post.id}`}>

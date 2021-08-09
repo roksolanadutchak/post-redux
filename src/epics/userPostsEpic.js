@@ -1,5 +1,5 @@
 import { ajax } from "rxjs/ajax";
-import { map } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 import { mergeMap } from "rxjs";
 import { ofType } from "redux-observable";
 import {GET_USER_POST, getUserPostsSuccess} from "../actions/userPostsAction";

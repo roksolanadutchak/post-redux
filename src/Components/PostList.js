@@ -9,6 +9,8 @@ import { default as pencil} from '../assets/pencil.svg'
 export function PostList(){
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.app.data)
+    const loading = useSelector((state) => state.app.loading)
+    const error = useSelector((state) => state.app.error)
     const [deleteId, setDeleteId] = useState(0)
 
     useEffect(()=>{
@@ -20,6 +22,8 @@ export function PostList(){
     const deletePostById = () =>{
         dispatch(deletePost(deleteId))
     }
+    if (loading) return <div className="loader">Loading...</div>
+    if (error) return <h1 className="text-red-900 uppercase">{error.message}</h1>
     return (
     <div className="container mx-auto ">
         <div className="post-wrapper">
