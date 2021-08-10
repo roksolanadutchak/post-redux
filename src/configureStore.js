@@ -15,21 +15,13 @@ import {CLEAR_COMMENTS} from "./actions/commentsAction";
 export function configureStore(){
     const rootEpic = combineEpics(postsEpic, postEpic, addPostEpic, deletePostEpic, updatePostEpic,getUsersEpic, userPostsEpic, commentsEpic)
     const epicMiddleware = createEpicMiddleware();
-    const appReducer = combineReducers({
+    const rootReducer = combineReducers({
         app: postsListReducer,
         post: postReducer,
         users: UsersListReducer,
         userPosts: UserPostsReducer,
         comments: CommentsReducer
     });
-    const rootReducer = (state, action) => {
-      if (action.type === CLEAR_USER_POST){
-          state.userPosts.userPosts = undefined;
-      } else if(action.type === CLEAR_COMMENTS){
-          state = undefined;
-      }
-      return appReducer(state, action);
-    }
     const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
     epicMiddleware.run(rootEpic);
     console.log(store.getState())

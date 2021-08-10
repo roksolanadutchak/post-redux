@@ -1,4 +1,5 @@
 import {
+    CLEAR_COMMENTS,
     GET_COMMENTS,
     GET_COMMENTS_SUCCESS
 } from "../actions/commentsAction";
@@ -21,6 +22,11 @@ export function CommentsReducer(state = initialState, action){
                 ...state,
                 comments: action.payload,
                 loading: false
+            }
+        }
+        case CLEAR_COMMENTS: {
+            return {
+                state: undefined
             }
         }
         default: return state;

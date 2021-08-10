@@ -1,4 +1,5 @@
 import {
+    CLEAR_USER_POST,
     GET_USER_POST, GET_USER_POST_ERROR,
     GET_USER_POST_SUCCESS
 } from "../actions/userPostsAction";
@@ -20,6 +21,11 @@ export function UserPostsReducer(state = initialState, action){
                 ...state,
                 userPosts: action.payload,
                 loading: false
+            }
+        }
+        case CLEAR_USER_POST: {
+            return {
+                state: undefined
             }
         }
         default: return state;
