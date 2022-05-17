@@ -4,7 +4,7 @@ import {PostList} from "./Components/PostList";
 function App() {
   return (
     <div className="App">
-      <PostList />
+      <h1>Learn React</h1>
     </div>
   );
 }
